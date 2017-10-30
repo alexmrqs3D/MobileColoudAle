@@ -12,20 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @* @Html.DisplayNameFor(model => model._TipoItem.Nome) *@
-            Tipo Item
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.Altura)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Raridade)
+            @Html.DisplayNameFor(model => model.Forca)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DanoMaximo)
+            @Html.DisplayNameFor(model => model.Inteligencia)
         </th>
         <th></th>
     </tr>
@@ -33,19 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item._TipoItem.Nome)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
+            @Html.DisplayFor(modelItem => item.Altura)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Raridade)
+            @Html.DisplayFor(modelItem => item.Forca)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DanoMaximo)
+            @Html.DisplayFor(modelItem => item.Inteligencia)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |

@@ -11,18 +11,17 @@ using Web.Models.Contexto;
 
 namespace Web.Controllers
 {
-    public class ItensController : Controller
+    public class ItemsController : Controller
     {
         private MeuContexto db = new MeuContexto();
 
-        // GET: Itens
+        // GET: Items
         public ActionResult Index()
         {
-            var items = db.Items.Include(i => i._TipoItem);
-            return View(items.ToList());
+            return View(db.Items.ToList());
         }
 
-        // GET: Itens/Details/5
+        // GET: Items/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,19 +36,18 @@ namespace Web.Controllers
             return View(item);
         }
 
-        // GET: Itens/Create
+        // GET: Items/Create
         public ActionResult Create()
         {
-            ViewBag.TipoItemID = new SelectList(db.TipoItems, "TipoItemID", "Nome");
             return View();
         }
 
-        // POST: Itens/Create
+        // POST: Items/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,Nome,Descricao,Raridade,DanoMaximo,TipoItemID")] Item item)
+        public ActionResult Create([Bind(Include = "ItemID,Nome,Altura,Forca,Inteligencia")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -58,11 +56,10 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TipoItemID = new SelectList(db.TipoItems, "TipoItemID", "Nome", item.TipoItemID);
             return View(item);
         }
 
-        // GET: Itens/Edit/5
+        // GET: Items/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,16 +71,15 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoItemID = new SelectList(db.TipoItems, "TipoItemID", "Nome", item.TipoItemID);
             return View(item);
         }
 
-        // POST: Itens/Edit/5
+        // POST: Items/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,Nome,Descricao,Raridade,DanoMaximo,TipoItemID")] Item item)
+        public ActionResult Edit([Bind(Include = "ItemID,Nome,Altura,Forca,Inteligencia")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -91,11 +87,10 @@ namespace Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TipoItemID = new SelectList(db.TipoItems, "TipoItemID", "Nome", item.TipoItemID);
             return View(item);
         }
 
-        // GET: Itens/Delete/5
+        // GET: Items/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +105,7 @@ namespace Web.Controllers
             return View(item);
         }
 
-        // POST: Itens/Delete/5
+        // POST: Items/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
