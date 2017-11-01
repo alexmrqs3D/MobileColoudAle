@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ApiClient : MonoBehaviour
 {
-    const string url = "http://localhost:50287/API/Itens/";
+    const string url = "http://localhost:50287/API/Items/";
 
     // Use this for initialization
     void Start()
@@ -39,6 +40,10 @@ public class ApiClient : MonoBehaviour
 
             Item[] teste = JsonHelper.getJsonArray<Item>(strRespostaServidor);
 
+            Text texto = GetComponent<Text>();
+
+            ImprimirItemHUD(teste[0], texto);
+
             foreach (Item i in teste)
             {
                 ImprimirItem(i);
@@ -51,7 +56,20 @@ public class ApiClient : MonoBehaviour
         Debug.Log("====== Dados objeto ======= ");
         Debug.Log("ID: " + i.ItemID);
         Debug.Log("Nome: " + i.Nome);
-        Debug.Log("Descrição: " + i.Descricao);
+        Debug.Log("Altura: " + i.Altura);
+        Debug.Log("Forca: " + i.Forca);
+        Debug.Log("Inteligencia: " + i.Inteligencia);
+
+    }
+
+    void ImprimirItemHUD(Item i, Text texto)
+    {
+        texto.text += "====== Dados objeto =======";
+        texto.text += "ID: " + i.ItemID;
+        texto.text += "Nome: " + i.Nome;
+        texto.text += "Altura: " + i.Altura;
+        texto.text += "Forca: " + i.Forca;
+        texto.text += "Inteligencia: " + i.Inteligencia;
 
     }
 }
